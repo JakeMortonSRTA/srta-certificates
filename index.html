@@ -90,25 +90,6 @@
   .sig-card-remove:hover{color:var(--fail);}
   .sig-none-msg{font-size:12px;color:var(--muted);font-family:'DM Mono',monospace;padding:4px 0;}
 </style>
-  <script>
-    window.addEventListener('load', function() {
-      const missing = [];
-      if (typeof XLSX === 'undefined') missing.push('XLSX (spreadsheet reader)');
-      if (typeof window.jspdf === 'undefined' && typeof jsPDF === 'undefined') missing.push('jsPDF (PDF generator)');
-      if (typeof JSZip === 'undefined') missing.push('JSZip (ZIP packager)');
-      if (missing.length > 0) {
-        document.body.innerHTML = '<div style="font-family:sans-serif;padding:40px;color:#c00;max-width:600px;margin:60px auto;border:2px solid #c00;border-radius:8px">' +
-          '<h2>&#9888; Required libraries failed to load</h2>' +
-          '<p>Could not load: <strong>' + missing.join(', ') + '</strong></p>' +
-          '<p>This is usually a network or browser security issue. Please try:</p>' +
-          '<ul><li>Refreshing the page (Ctrl+R)</li>' +
-          '<li>Checking your internet connection</li>' +
-          '<li>Opening in Chrome or Edge</li>' +
-          '<li>Disabling script-blocking browser extensions</li></ul>' +
-          '<p style="color:#666;font-size:13px">The generator requires internet access to load its libraries.</p></div>';
-      }
-    });
-  </script>
 </head>
 <body>
 <header>
@@ -475,14 +456,6 @@ function fd(v) {
     const year = parseInt(dmyShort[3]) + 2000;
     if (year < 1970 || year > 2100) return '';
     return `${String(dmyShort[1]).padStart(2,'0')}/${String(dmyShort[2]).padStart(2,'0')}/${year}`;
-  }
-
-  // mmm-yy format e.g. "Nov-26" — parse manually
-  const mmmyy = s.match(/^([A-Za-z]{3})-(\d{2})$/);
-  if (iso) {
-    const year = parseInt(iso[1]);
-    if (year < 1970 || year > 2100) return '';
-    return `${iso[3]}/${iso[2]}/${iso[1]}`;
   }
 
   // mmm-yy format e.g. "Nov-26" — parse manually
